@@ -17,7 +17,8 @@ Meteor.methods({
 	//  Cada vez que un usuario se registre y en sus datos no se encuentre
 	// el campo puntuacion, se inicializa la puntuacion a cero.
 	InicializaCliente: function(id){
-		Meteor.users.update({_id:id},{$set:{puntuacion:0,equipos:[],torneos:[],penalizacion:0,estado:"Conectado"}});
+		var puntuacionJuegos = {'AlienInvasion':0,'Carcassonne':0,'Fruits':0};
+		Meteor.users.update({_id:id},{$set:{puntuacion:puntuacionJuegos,equipos:[],torneos:[],penalizacion:0,estado:"Conectado"}});
 	},
 	
 	// Actualiza el estado de todos los usuarios registrados cada vez que hay
