@@ -87,7 +87,10 @@ Template.input.events={
 Template.button.events={
 
 	'click input.b1': function () {
-
+		var user = Meteor.user();
+		//var chatArea = $('#tabs-2-1');
+		Meteor.call('IncrementarPuntuacion',user,'Carcassonne',200);
+		//chatArea.prepend("<tr><td><strong>"+user.username+"</strong>:</td><td><div>"+user.puntuacion+"</div></td>");
 	},
 	'click input.b2': function(){
 
