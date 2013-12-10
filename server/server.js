@@ -17,7 +17,7 @@ Meteor.methods({
 	//  Cada vez que un usuario se registre y en sus datos no se encuentre
 	// el campo puntuacion, se inicializa la puntuacion a cero.
 	InicializaCliente: function(id){
-		var puntuacionJuegos = [{juego:'AlienInvasion',puntuacion:0},{juego:'Carcassonne',puntuacion:0},{juego:'FruitsWars',puntuacion:0}];
+		var puntuacionJuegos = [{juego:'AlienInvasion',total:0,record:0},{juego:'Carcassonne',total:0,record:0},{juego:'FruitsWars',total:0,record:0}];
 		Meteor.users.update({_id:id},{$set:{puntuacion:puntuacionJuegos,equipos:[],torneos:[],penalizacion:0,estado:"Conectado"}});
 	},
 	
@@ -39,11 +39,15 @@ Meteor.methods({
 
 	//  Cada vez que un jugador sume una puntuación se deberá llamar a 
 	//  esta función.
-	IncrementarPuntuacion: function(user,juego,punt){
-		console.log(juego+" : "+punt)
-		Meteor.users.update({_id:user._id,'puntuacion.juego':juego},{$inc:{'puntuacion.$.puntuacion':punt}});
+	IncrementarPuntuacionTotal: function(user,juego,punt){
+		Meteor.users.update({_id:user._id,'puntuacion.juego':juego},{$inc:{'puntuacion.$.total':punt}});
 	},
 	
+	RecordPuntuacion: function(user,juego,punt){
+		var p = user.puntuacion.puntuacion;
+		Meteor.users.update({_id:user._id,'puntuacion.juego':juego,'puntuacion.record':{$lt:punt}},{$set:{'puntuacion.$.record':punt}});
+	},
+
 	// Cada vez que se cree un equipo, el equipo es guardado en la colección
 	// users. "equipos" es un campo de la colección de usuarios, que guarda la lista
 	// de equipos en los que participa.
