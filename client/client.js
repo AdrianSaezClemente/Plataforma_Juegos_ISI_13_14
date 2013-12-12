@@ -70,11 +70,16 @@ Template.input.events={
 				}else{
 					var name="Anon";
 				}
-				Messages.insert({
-					name:name,
-					message:message.val(),
-					time:Date.now()
-				});
+				if(Meteor.users.findOne(Meteor.userId) != undefined){
+					Messages.insert({
+						name:name,
+						message:message.val(),
+						time:Date.now()
+					});
+				}
+				else{
+					alert('Debes estar registrado para poder mandar mensages')
+				}
 			}
 			message.val("");	
 		}
