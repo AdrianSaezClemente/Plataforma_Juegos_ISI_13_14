@@ -44,7 +44,7 @@ Meteor.methods({
 	},
 	
 	RecordPuntuacion: function(user,juego,punt){
-		var p = user.puntuacion.puntuacion;
+		var p = user.puntuacion.record;
 		Meteor.users.update({_id:user._id,'puntuacion.juego':juego,'puntuacion.record':{$lt:punt}},{$set:{'puntuacion.$.record':punt}});
 	},
 

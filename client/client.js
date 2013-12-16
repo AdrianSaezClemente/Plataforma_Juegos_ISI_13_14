@@ -88,11 +88,11 @@ Template.button.events={
 
 	'click input.b1': function () {
 		var user = Meteor.user();
-		Meteor.call('IncrementarPuntuacionTotal',user,'Carcassonne',100);
+		Meteor.call('IncrementarPuntuacionTotal',user,'FruitsWars',50);
 	},
 	'click input.b2': function(){
 		var user = Meteor.user();
-		Meteor.call('RecordPuntuacion',user,'Carcassonne',200);
+		Meteor.call('RecordPuntuacion',user,'FruitsWars',200);
 	}
 }
 Template.options.events={
